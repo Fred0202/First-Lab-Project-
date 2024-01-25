@@ -9,29 +9,85 @@
     <script src="js/index.js" defer></script>
   </head>
   <body>
-    <div class="game-modal">
-      <div class="content">
-        <img src="assets/images/Skull.jpg" alt="img" />
-        <h4></h4>
-        <p><b></b></p>
-        <button class="play-again">Play Again</button>
+    <div class="start-screen">
+      <div class="story">
+        <h1>Welcome to Hangman's Game</h1>
+
+        <div class="narrative">
+          <h3>Story:</h3>
+          <p>
+            <b
+              >Your days as a pirate are almost over. You have been captured and
+              are awaiting what is sure to be an unfair trial. As you wait
+              impatiently, someone comes to you with an offer.</b
+            >
+          </p>
+          <p>
+            <b
+              >Hangman: If you want your freedom, I challenge you to play this
+              game, and if you win, you'll go free, but if you lose, you'll
+              hang.</b
+            >
+          </p>
+        </div>
+
+        <h1>You decide:</h1>
+        <div id="start-page">
+          <button id="start-button">To play his game</button>
+        </div>
       </div>
     </div>
-    <div class="container">
-      <div class="hangman-box">
-        <img
-          src="assets/images/hangman-0.png"
-          draggable="false"
-          alt="hangman-img"
-        />
-        <h1>Hangman Game</h1>
+
+    <div class="game-screen" style="display: none">
+      <div class="container">
+        <div class="hangman-box">
+          <img
+            src="assets/images/hangman-0.png"
+            draggable="false"
+            alt="hangman-img"
+          />
+          <h1>Hangman Game</h1>
+        </div>
+        <div class="game-box">
+          <ul class="word-display"></ul>
+          <h4 class="hint-text">Hint: <b></b></h4>
+          <h4 class="guesses-text">Incorrect guesses: <b></b></h4>
+          <div class="keyboard"></div>
+        </div>
       </div>
-      <div class="game-box">
-        <ul class="word-display"></ul>
-        <h4 class="hint-text">Hint: <b></b></h4>
-        <h4 class="guesses-text">Incorrect guesses: <b></b></h4>
-        <div class="keyboard"></div>
+
+      <div class="game-modal">
+        <div class="content">
+          <img src="assets/images/Skull.jpg" alt="img" />
+          <h4></h4>
+          <p><b></b></p>
+          <button class="play-again">Play Again</button>
+        </div>
       </div>
     </div>
+    <audio id="background-music" loop>
+      <source
+        src="assets/Audios/loyalty-to-the-crown_38sec-187371.mp3"
+        type="audio/mp3"
+      />
+    </audio>
+    <audio id="wrong-answer-sound">
+      <source
+        src="assets/Audios/failure-drum-sound-effect-2-7184.mp3"
+        type="audio/mp3"
+      />
+    </audio>
+    <audio id="right-answer-sound">
+      <source src="assets/Audios/interface-124464.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="game-over-defeat-sound">
+      <source src="assets/Audios/violin-lose-4-185125.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="game-over-victory-sound">
+      <source
+        src="assets/Audios/success-fanfare-trumpets-6185.mp3"
+        type="audio/mp3"
+      />
+    </audio>
   </body>
 </html>

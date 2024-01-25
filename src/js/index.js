@@ -6,6 +6,20 @@ class HangmanGame {
     this.hangmanImage = document.querySelector(".hangman-box img");
     this.gameModal = document.querySelector(".game-modal");
     this.playAgainBtn = this.gameModal.querySelector("button");
+    this.startScreen = document.querySelector("start-screen");
+    this.backgroundMusic = document.getElementById("background-music");
+    this.wrongAnswerSound = document.getElementById("wrong-answer-sound");
+    this.rightAnswerSound = document.getElementById("right-answer-sound");
+    this.gameOverDefeatSound = document.getElementById(
+      "game-over-defeat-sound"
+    );
+    this.gameOverVictorySound = document.getElementById(
+      "game-over-victory-sound"
+    );
+
+    document
+      .getElementById("start-button")
+      .addEventListener("click", this.handleStartButtonClick.bind(this));
 
     this.currentWord = "";
     this.correctLetters = [];
@@ -28,6 +42,16 @@ class HangmanGame {
       .querySelectorAll("button")
       .forEach((btn) => (btn.disabled = false));
     this.gameModal.classList.remove("show");
+  }
+  gameScreen = document.querySelector(".game-screen");
+  if(gameScreen) {
+    gameScreen.style.display = "none";
+  }
+  showStartScreen() {
+    const startScreen = document.querySelector(".start-screen");
+    if (startScreen) {
+      startScreen.style.display = "block";
+    }
   }
 
   getRandomWord() {
@@ -52,6 +76,17 @@ class HangmanGame {
       "p"
     ).innerHTML = `${modalText} <b>${this.currentWord}</b>`;
     this.gameModal.classList.add("show");
+    setTimeout(() => {
+      this.resetGame();
+      this.showStartScreen();
+    }, 5000);
+    this.backgroundMusic.pause();
+    this.backgroundMusic.currentTime = 0;
+    if (isVictory) {
+      this.gameOverVictorySound.play();
+    } else {
+      this.gameOverDefeatSound.play();
+    }
   }
 
   initGame(button, clickedLetter) {
@@ -62,11 +97,13 @@ class HangmanGame {
           const li = this.wordDisplay.querySelectorAll("li")[index];
           li.innerText = letter;
           li.classList.add("guessed");
+          this.rightAnswerSound.play();
         }
       });
     } else {
       this.wrongGuessCount++;
       this.hangmanImage.src = `assets/images/hangman-${this.wrongGuessCount}.png`;
+      this.playWrongAnswerSound();
     }
     button.disabled = true;
     this.guessesText.innerText = `${this.wrongGuessCount} / ${this.maxGuesses}`;
@@ -77,6 +114,7 @@ class HangmanGame {
   }
 
   createAlphabetButtons() {
+    this.keyboardDiv.innerHTML = "";
     for (let i = 97; i <= 122; i++) {
       const button = document.createElement("button");
       button.innerText = String.fromCharCode(i);
@@ -90,8 +128,32 @@ class HangmanGame {
   startGame() {
     this.createAlphabetButtons();
     this.getRandomWord();
+    this.backgroundMusic.play();
+  }
+
+  handleStartButtonClick() {
+    this.showGamePage();
+    this.startGame();
+  }
+
+  showGamePage() {
+    const startScreen = document.querySelector(".start-screen");
+    const gameScreen = document.querySelector(".game-screen");
+
+    if (startScreen && gameScreen) {
+      startScreen.style.display = "none";
+      gameScreen.style.display = "block";
+    }
+  }
+  playRightAnswerSound() {
+    this.rightAnswerSound.play();
+  }
+  playWrongAnswerSound() {
+    this.wrongAnswerSound.play();
   }
 }
 
-const hangmanGame = new HangmanGame();
-hangmanGame.startGame();
+document.addEventListener("DOMContentLoaded", function () {
+  const hangmanGame = new HangmanGame();
+  hangmanGame.startGame();
+});
