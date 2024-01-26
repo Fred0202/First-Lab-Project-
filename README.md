@@ -25,12 +25,5 @@ JavaScript: The game logic is implemented using JavaScript.
 
 Audio Files: Background music and sound effects for an immersive experience.
 
-Getting Started
-To run the Hangman Game locally, follow these steps:
-
-Clone the Repository: git clone https://github.com/your-username/hangman-game.git
-
-Open the Game: Open the index.html file in your web browser.
-
 Dependencies
 Open Sans Font: Used for the text in the game.
